@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin(origins ="*")
 public class TransactionController {
     @Autowired
-    public TransactionService transactionService;
+    private TransactionService transactionService;
     //get all transactions
     @GetMapping("/transactions")
     public List<Transaction> getTransactions(){
@@ -20,14 +20,14 @@ public class TransactionController {
 
     //get transaction by id
     @GetMapping("/transactions/{id}")
-    public Transaction getTransactionsById(){
-        return this.transactionService.getTransactionsById();
+    public Transaction getTransactionsById(@PathVariable String id){
+        return this.transactionService.getTransactionsById(Integer.parseInt(id));
     }
 
     //get transaction by vendor id
     @GetMapping("/transactions/{vendorid}")
-    public Transaction getTransactionsByVendorId(){
-        return this.transactionService.getTransactionsByVendorId();
+    public Transaction getTransactionsByVendorId(@PathVariable String vendorid){
+        return this.transactionService.getTransactionsByVendorId(Integer.parseInt(vendorid));
     }
 
     //add transaction
