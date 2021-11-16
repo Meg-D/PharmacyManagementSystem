@@ -1,6 +1,8 @@
 package com.iiitb.pharmacy.services;
 
 import com.iiitb.pharmacy.beans.Medicine;
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 public interface MedicineService {
