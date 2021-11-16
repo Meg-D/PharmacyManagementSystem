@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins ="*")
 public class ItemController {
     @Autowired
-    public ItemService itemService;
+    private ItemService itemService;
 
     //add item
     @PostMapping(path="/item",consumes = "application/JSON")
@@ -22,12 +24,18 @@ public class ItemController {
 
     //delete item
     @DeleteMapping("/item/{itemid}")
-    public ResponseEntity<HttpStatus> deleteArtist(@PathVariable String itemId){
+    public ResponseEntity<HttpStatus> deleteItem(@PathVariable String itemId){
         try{
             this.itemService.deleteItem(Integer.parseInt(itemId));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch(Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    //get all items
+    @GetMapping("/item/{saleid}")
+    public List<Item> getItemsBySaleId(@PathVariable String saleid){
+        return this.itemService.getItemsBySaleId(Integer.parseInt(saleid));
     }
 }

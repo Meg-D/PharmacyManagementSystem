@@ -14,12 +14,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction getTransactionsById() {
+    public Transaction getTransactionsById(int id) {
         return null;
     }
 
     @Override
-    public Transaction getTransactionsByVendorId() {
+    public Transaction getTransactionsByVendorId(int id) {
         return null;
     }
 
