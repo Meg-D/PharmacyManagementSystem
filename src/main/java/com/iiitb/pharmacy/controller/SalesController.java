@@ -16,14 +16,14 @@ public class SalesController {
     @Autowired
     private SalesService salesService;
 
-    @GetMapping("/diff")
-    public void getNetDifference(){
-        salesService.getNetDifference();
-    }
+//    @GetMapping("/diff")
+//    public Integer getNetDifference(){
+//        salesService.getNetDifference();
+//    }
 
     @GetMapping("/details/{saleId}")
     public Sale viewSaleDetails(@PathVariable String saleId){
-        return salesService.viewSaleDetails(saleId);
+        return salesService.viewSaleDetails(Integer.parseInt(saleId));
     }
 
     @PostMapping("/add")
@@ -32,8 +32,8 @@ public class SalesController {
     }
 
     @GetMapping("/getByUser/{userId}")
-    public Sale getSaleByUserId(@PathVariable String userId){
-        return salesService.getSaleByUserId(userId);
+    public Optional<List<Sale>> getSaleByUserId(@PathVariable String userId){
+        return salesService.getSaleByUserId(Integer.parseInt(userId));
     }
 
     @GetMapping("/getByCustomer/{customerId}")

@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface SalesService {
 
-    public void getNetDifference();
-    public Sale viewSaleDetails(String saleId);
+   // public void getNetDifference();
+    public Sale viewSaleDetails(int saleId);
     public Sale addSale(Sale sale);
-    public Sale getSaleByUserId(String userId);
+    public Optional<List<Sale>> getSaleByUserId(int userId);
     public Optional<List<Sale>> getSaleByCustomerNumber(String phone);
-    public void generateBill();
+    //public void generateBill();
 }
