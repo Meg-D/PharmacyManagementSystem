@@ -27,7 +27,7 @@ public class Vendor implements Serializable {
     private String location;
 
     @Column(nullable=false)
-    private Date start_date;
+    private String start_date;
 
     @Column(nullable = false)
     private String email;

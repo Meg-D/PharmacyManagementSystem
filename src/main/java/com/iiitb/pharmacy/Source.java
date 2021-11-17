@@ -19,7 +19,7 @@ public class Source {
             dataSourceBuilder.url("jdbc:mysql://localhost:3306/pms?createDatabaseIfNotExist=true");
         }
         dataSourceBuilder.username("root");
-        dataSourceBuilder.password("C@sper7197");
+        dataSourceBuilder.password("euphoria19");
         return dataSourceBuilder.build();
     }
 }

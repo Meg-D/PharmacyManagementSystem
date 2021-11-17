@@ -1,8 +1,6 @@
 package com.iiitb.pharmacy.beans;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,8 +9,6 @@ import javax.persistence.*;
 @Table
 @Setter
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class User {
     @Id
@@ -30,4 +26,16 @@ public class User {
 
     @Column
     private String address;
+
+    public User(){
+
+    }
+
+    public User(Integer user_id, String username, String password, String phone, String address) {
+        this.user_id = user_id;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+    }
 }
