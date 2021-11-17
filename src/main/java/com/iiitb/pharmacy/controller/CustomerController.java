@@ -17,13 +17,13 @@ public class CustomerController {
     @PostMapping(path = "/add",
     consumes = {"application/json"},
     produces = {"application/json"})
-    public void addCustomer(@RequestBody Customer customer){
-        customerService.addCustomer(customer);
+    public Customer addCustomer(@RequestBody Customer customer){
+        return customerService.addCustomer(customer);
     }
 
-    @GetMapping("/getCustomer/{customerId}")
-    public Customer getCustomerById(@PathVariable String customerId){
-        return customerService.getCustomerById(customerId);
+    @GetMapping("/getCustomer/{phoneNumber}")
+    public Customer getCustomerByContactNumber(@PathVariable String phoneNumber){
+        return customerService.getCustomerByContactNumber(phoneNumber);
     }
 
 

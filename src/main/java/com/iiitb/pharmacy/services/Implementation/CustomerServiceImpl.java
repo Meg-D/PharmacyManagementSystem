@@ -6,18 +6,26 @@ import com.iiitb.pharmacy.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerDAO customerDAO;
 
-    public void addCustomer(Customer customer){
-
+    // register a new customer
+    public Customer addCustomer(Customer customer){
+        Optional<Customer> obj = customerDAO.findByPhone(customer.getPhone());
+        if(obj.isEmpty()) customerDAO.save(customer);
+        return customer;
     }
 
-    public Customer getCustomerById(String id){
-        return new Customer();
+
+    // number will be used as the primary key
+    public Customer getCustomerByContactNumber(String number){
+        Optional<Customer> obj = customerDAO.findByPhone(number);
+        return obj.get();
     }
 
 }

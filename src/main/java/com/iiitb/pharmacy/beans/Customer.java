@@ -27,5 +27,6 @@ public class Customer {
     @Column(nullable = false)
     private Integer type; //1-normal 2-hospital
 
+
 }
 
