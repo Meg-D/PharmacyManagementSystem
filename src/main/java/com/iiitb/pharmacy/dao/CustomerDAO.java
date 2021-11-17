@@ -8,7 +8,11 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerDAO extends JpaRepository<Customer,Integer> {
+<<<<<<< Updated upstream
 
     Optional<Customer> findByPhone(String number);
 
+=======
+    Customer getCustomerByPhone(String phone);
+>>>>>>> Stashed changes
 }

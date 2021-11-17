@@ -15,11 +15,17 @@ public class UserController {
     private UserService userService;
 
     @PutMapping("/update")
-    public void updateProfile(@RequestBody User user){}
+    public User updateProfile(@RequestBody User user){
+        return userService.updateProfile(user);
+    }
 
     @PostMapping("/add")
-    public void addUser(@RequestBody User user){}
+    public User addUser(@RequestBody User user){
+        return userService.addUser(user);
+    }
 
     @GetMapping("/login")
-    public void login(@RequestBody User user){}
+    public User login(@RequestBody User user){
+        return userService.login(user);
+    }
 }

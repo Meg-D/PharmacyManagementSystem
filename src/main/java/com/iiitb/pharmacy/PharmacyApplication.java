@@ -15,28 +15,15 @@ import org.springframework.context.annotation.Bean;
 public class PharmacyApplication {
 
     @Autowired
-    CustomerDAO customerDAO;
-
-    @Autowired
-    ItemDAO itemDAO;
-
-    @Autowired
     UserDAO userDAO;
-
-    @Autowired
-    RequestDAO requestDAO;
 
     @Autowired
     MedicineDAO medicineDAO;
 
-    @Autowired
-    SaleDAO saleDAO;
 
     @Autowired
     VendorDAO vendorDAO;
 
-    @Autowired
-    TransactionDAO transactionDAO;
     public static void main(String[] args) {
         SpringApplication.run(PharmacyApplication.class, args);
     }

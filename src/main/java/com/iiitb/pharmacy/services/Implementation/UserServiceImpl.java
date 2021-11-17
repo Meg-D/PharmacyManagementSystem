@@ -12,9 +12,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
-    public void updateProfile(User user){}
+    @Override
+    public User updateProfile(User user){
+        return userDAO.save(user);
+    }
 
-    public void addUser(User user){}
+    @Override
+    public User addUser(User user){
+        return userDAO.save(user);
+    }
 
-    public void login(User user){}
+    @Override
+    public User login(User user){
+        String username = user.getUsername();
+        String password = user.getPassword();
+        return userDAO.findByUsernameEqualsAndPasswordEquals(username,password);
+    }
+
+    @Override
+    public String changePassword(String email,String old, String newp, String newp2) {
+        String check = userDAO.getPasswordByEmail(email);
+//        System.out.println(old);
+//        System.out.println(check);
+        if(!old.equals(check)) return "Old password does not match";
+        if(!newp.equals(newp2)) return "Confirm password does not match";
+        userDAO.updatePassword(email,newp);
+        return "Success";
+    }
 }

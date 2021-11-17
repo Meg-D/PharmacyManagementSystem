@@ -5,6 +5,9 @@ import com.iiitb.pharmacy.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/sales")
@@ -24,8 +27,8 @@ public class SalesController {
     }
 
     @PostMapping("/add")
-    public void addSale(Sale sale){
-        salesService.addSale(sale);
+    public Sale addSale(Sale sale){
+        return salesService.addSale(sale);
     }
 
     @GetMapping("/getByUser/{userId}")
@@ -34,8 +37,8 @@ public class SalesController {
     }
 
     @GetMapping("/getByCustomer/{customerId}")
-    public Sale getSaleByCustomerId(@PathVariable String customerId){
-        return salesService.getSaleByCustomerId(customerId);
+    public Optional<List<Sale>> getSaleByCustomerId(@PathVariable String phone){
+        return salesService.getSaleByCustomerNumber(phone);
     }
 
 }

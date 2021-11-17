@@ -34,5 +34,8 @@ public class Transaction {
 
     @ManyToOne
     private Vendor ven_id;
+
+    @ManyToOne
+    private User user_id;
 }
 

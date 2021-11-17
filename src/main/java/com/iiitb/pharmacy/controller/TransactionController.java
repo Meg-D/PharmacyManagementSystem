@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins ="*")
@@ -20,13 +21,13 @@ public class TransactionController {
 
     //get transaction by id
     @GetMapping("/transactions/{id}")
-    public Transaction getTransactionsById(@PathVariable String id){
-        return this.transactionService.getTransactionsById(Integer.parseInt(id));
+    public Optional<List<Transaction>> getTransactionsUserById(@PathVariable String userid){
+        return this.transactionService.getTransactionsByUserId(Integer.parseInt(userid));
     }
 
     //get transaction by vendor id
     @GetMapping("/transactions/{vendorid}")
-    public Transaction getTransactionsByVendorId(@PathVariable String vendorid){
+    public Optional<List<Transaction>> getTransactionsByVendorId(@PathVariable String vendorid){
         return this.transactionService.getTransactionsByVendorId(Integer.parseInt(vendorid));
     }
 

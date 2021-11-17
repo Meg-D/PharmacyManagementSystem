@@ -4,7 +4,8 @@ import com.iiitb.pharmacy.beans.User;
 
 public interface UserService {
 
-    public void updateProfile(User user);
-    public void addUser(User user);
-    public void login(User user);
+    public User updateProfile(User user);
+    public User addUser(User user);
+    public User login(User user);
+    public String changePassword(String email,String old, String newp,String newp2);
 }
