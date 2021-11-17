@@ -10,5 +10,5 @@ public interface ItemService {
 
     public void deleteItem(int itemId);
 
-    List<Item> getItemsBySaleId(int itemId);
+    List<Item> getItemsBySaleId(int saleId);
 }
