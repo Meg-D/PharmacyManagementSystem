@@ -27,19 +27,23 @@ public class MedicineController {
     @PostMapping(path = "/add",
     produces = {"application/json"},
     consumes = {"application/json"})
+    // a form to add a new medicine
+    // add medicine when a request is processed
     public void addMedicine(@RequestBody Medicine medicine){
         medicineService.addMedicine(medicine);
     }
 
+    // not required here
+    // while adding item, the updateMedicine service will be called directly
     @PostMapping(path = "/update",
     produces = {"application/json"},
     consumes = {"application/json"})
     public void updateMedicine(@RequestBody Medicine medicine){
-        medicineService.updateMedicine(medicine);
+        medicineService.updateMedicine(medicine,2);
     }
 
     @DeleteMapping(path = "/delete")
-    public void deleteMedicine(@PathVariable String medicineId){
-        medicineService.deleteMedicine(medicineId);
+    public void deleteMedicine(@RequestBody Medicine medicine){
+        medicineService.deleteMedicine(medicine);
     }
 }

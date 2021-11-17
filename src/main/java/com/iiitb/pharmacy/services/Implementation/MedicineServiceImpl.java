@@ -15,21 +15,45 @@ public class MedicineServiceImpl implements MedicineService {
     public MedicineDAO medicineDAO;
 
     public Medicine getMedicineByName(String medicineName){
-        return new Medicine();
+        Optional<Medicine> med = medicineDAO.findByName(medicineName);
+        if(med.isEmpty()) return null;
+        return med.get();
     }
 
     public List<Medicine> getAllMedicines(){
-        return new ArrayList<>();
+        List<Medicine> medicineList = medicineDAO.findAll();
+        return medicineList;
     }
 
     public void addMedicine(Medicine medicine){
+        // check if the medicine exists
+        Optional<Medicine> med = medicineDAO.findByName(medicine.getName());
 
+        // doesn't : add a new medicine
+        if(med.isEmpty()) medicineDAO.save(medicine);
+
+        // does : check the cost
+        // if medicine has the same cost update the existing entry
+        else if(medicine.getCost() == med.get().getCost()){
+            int existingStock = med.get().getQuantity_left();
+            int updatedStock = existingStock + medicine.getQuantity_left();
+            medicine.setQuantity_left(existingStock+updatedStock);
+            medicineDAO.save(medicine);
+        }
+
+        // else make a new entry
+        else medicineDAO.save(medicine);
     }
 
-    public void updateMedicine(Medicine medicineId){
-
+    // to update the medicine stock. update quantity_left
+    public void updateMedicine(Medicine medicine, int quantity){
+            medicine.setQuantity_left(medicine.getQuantity_left() - quantity);
+            medicineDAO.save(medicine);
     }
 
-    public void deleteMedicine(String medicineId){}
+
+    public void deleteMedicine(Medicine medicine){
+        medicineDAO.delete(medicine);
+    }
 
 }
