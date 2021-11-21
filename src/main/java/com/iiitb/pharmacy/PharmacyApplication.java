@@ -37,8 +37,8 @@ public class PharmacyApplication {
 
             vendorDAO.save(new Vendor(1,"vendor1","bangalore","12-08-98","vendor1","098"));
 
-            medicineDAO.save(new Medicine(1,"crocin",9,20));
-            medicineDAO.save(new Medicine(2,"cetrazine",4,15));
+            medicineDAO.save(new Medicine(1,"crocin",9,20.0));
+            medicineDAO.save(new Medicine(2,"cetrazine",4,15.0));
         };
     }
 }

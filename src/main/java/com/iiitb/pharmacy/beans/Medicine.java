@@ -26,6 +26,6 @@ public class Medicine {
     private Integer quantity_left;
 
     @Column(nullable = false)
-    private Integer cost;
+    private Double cost;
 }
 

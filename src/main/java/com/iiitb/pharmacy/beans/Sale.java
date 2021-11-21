@@ -21,7 +21,7 @@ public class Sale {
     private Integer sale_id;
 
     @Column(nullable = false)
-    private Integer amount;
+    private Double amount;
 
     @Column(nullable = false)
     private Integer net_diff;

@@ -3,7 +3,6 @@ package com.iiitb.pharmacy.dto;
 public class Items {
     private Integer item_id;
     private Integer quantity;
-    private Integer amount;
     private Integer discount;
     private Integer med_id;
     private Integer cust_id;
@@ -23,14 +22,6 @@ public class Items {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     public Integer getDiscount() {

@@ -23,7 +23,7 @@ public class Item {
     private Integer quantity;
 
     @Column(nullable = false)
-    private Integer amount;
+    private Double amount;
 
     @Column(nullable = false)
     private Integer discount;
