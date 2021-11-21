@@ -24,10 +24,10 @@ public class Sale {
     private Double amount;
 
     @Column(nullable = false)
-    private Integer net_diff;
+    private Double net_diff;
 
     @Column
-    private Date date;
+    private String date;
 
     @ManyToOne
     private Customer cust_id;

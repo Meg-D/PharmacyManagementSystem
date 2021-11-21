@@ -4,8 +4,10 @@ import com.iiitb.pharmacy.beans.Customer;
 import com.iiitb.pharmacy.beans.Sale;
 import com.iiitb.pharmacy.beans.User;
 import com.iiitb.pharmacy.dao.CustomerDAO;
+import com.iiitb.pharmacy.dao.ItemDAO;
 import com.iiitb.pharmacy.dao.SaleDAO;
 import com.iiitb.pharmacy.dao.UserDAO;
+import com.iiitb.pharmacy.dto.Sales;
 import com.iiitb.pharmacy.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +27,24 @@ public class SalesServiceImpl implements SalesService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private ItemDAO itemDAO;
+
     //public void getNetDifference(){}
     public Sale viewSaleDetails(int saleId){
         return saleDAO.findById(saleId).get();
     }
 
-    public Sale addSale(Sale sale){
-        return saleDAO.save(sale);
+    public Sale addSale(Sales sale){
+        User u = userDAO.getById(sale.getUser_id());
+        Customer c = customerDAO.getById(sale.getCust_id());
+        Double amount = 0.0;
+        List<Double> itemsAmount = itemDAO.getAmountBySaleId(sale.getSale_id());
+        for (double amt: itemsAmount) {
+            System.out.print(amt+ ' ');
+        }
+        Sale s = new Sale(sale.getSale_id(), amount, sale.getNet_diff(), sale.getDate(), c,u);
+        return saleDAO.save(s);
     }
 
     public Optional<List<Sale>> getSaleByUserId(int userId){

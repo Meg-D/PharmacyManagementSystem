@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SaleDAO extends JpaRepository<Sale,Integer> {
-    @Query("SELECT s FROM Sale s WHERE s.cust_id= :customer_id")
-    Optional<List<Sale>> findByCustomer(@Param("customer_id")Customer customer_id);
+    @Query("SELECT s FROM Sale s WHERE s.cust_id= :cust_id_customer_id")
+    Optional<List<Sale>> findByCustomer(@Param("cust_id_customer_id")Customer customer_id);
 
 
-    @Query("SELECT s FROM Sale s where s.user_id= : user_id")
-    Optional<List<Sale>> findByUser(@Param("user_id") User user_id);
+    @Query("SELECT s FROM Sale s where s.user_id= :user_id_user_id")
+    Optional<List<Sale>> findByUser(@Param("user_id_user_id") User user_id);
 }

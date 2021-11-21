@@ -1,6 +1,7 @@
 package com.iiitb.pharmacy.controller;
 
 import com.iiitb.pharmacy.beans.Sale;
+import com.iiitb.pharmacy.dto.Sales;
 import com.iiitb.pharmacy.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class SalesController {
     }
 
     @PostMapping("/add")
-    public Sale addSale(Sale sale){
+    public Sale addSale(Sales sale){
         return salesService.addSale(sale);
     }
 
@@ -36,8 +37,8 @@ public class SalesController {
         return salesService.getSaleByUserId(Integer.parseInt(userId));
     }
 
-    @GetMapping("/getByCustomer/{customerId}")
-    public Optional<List<Sale>> getSaleByCustomerId(@PathVariable String phone){
+    @GetMapping("/getByCustomer/{phone}")
+    public Optional<List<Sale>> getSaleByCustomerPhone(@PathVariable String phone){
         return salesService.getSaleByCustomerNumber(phone);
     }
 
