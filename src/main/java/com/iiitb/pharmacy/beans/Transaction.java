@@ -27,7 +27,7 @@ public class Transaction {
     private Integer price;
 
     @Column(nullable = false)
-    private Date date_of_purchase;
+    private String date_of_purchase;
 
     @ManyToOne
     private Medicine med_id;

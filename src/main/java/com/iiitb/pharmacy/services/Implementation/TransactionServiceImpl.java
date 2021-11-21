@@ -1,11 +1,14 @@
 package com.iiitb.pharmacy.services.Implementation;
 
+import com.iiitb.pharmacy.beans.Medicine;
 import com.iiitb.pharmacy.beans.Transaction;
 import com.iiitb.pharmacy.beans.User;
 import com.iiitb.pharmacy.beans.Vendor;
+import com.iiitb.pharmacy.dao.MedicineDAO;
 import com.iiitb.pharmacy.dao.TransactionDAO;
 import com.iiitb.pharmacy.dao.UserDAO;
 import com.iiitb.pharmacy.dao.VendorDAO;
+import com.iiitb.pharmacy.dto.Transactions;
 import com.iiitb.pharmacy.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class TransactionServiceImpl implements TransactionService {
     private VendorDAO vendorDAO;
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private MedicineDAO medicineDAO;
 
     @Override
     public List<Transaction> getTransactions() {
@@ -50,7 +55,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction addTransaction(Transaction transaction) {
-        return transactionDAO.save(transaction);
+    public Transaction addTransaction(Transactions transaction) {
+        Vendor v = vendorDAO.getById(transaction.getVendor_id());
+        Medicine m = medicineDAO.getById(transaction.getMedicine_id());
+        User u = userDAO.getById(transaction.getUser_id());
+        Transaction t = new Transaction(transaction.getTransaction_id(),transaction.getQuantity(),transaction.getPrice(),transaction.getDate_of_purchase(),m,v,u);
+        return transactionDAO.save(t);
     }
 }
