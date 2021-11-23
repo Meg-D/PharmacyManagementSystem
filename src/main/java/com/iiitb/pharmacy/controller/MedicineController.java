@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/medicines")
+@RequestMapping("/medicine")
 public class MedicineController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class MedicineController {
         return medicineService.getMedicineByName(medicineName);
     }
 
-    @GetMapping("/medicineList")
+    @GetMapping("/getAll")
     public List<Medicine> getAllMedicines(){
         return medicineService.getAllMedicines();
     }
@@ -31,8 +31,8 @@ public class MedicineController {
     consumes = {"application/json"})
     // a form to add a new medicine
     // add medicine when a request is processed
-    public void addMedicine(@RequestBody Medicine medicine){
-        medicineService.addMedicine(medicine);
+    public Medicine addMedicine(@RequestBody Medicine medicine){
+        return this.medicineService.addMedicine(medicine);
     }
 
     // not required here
@@ -40,8 +40,8 @@ public class MedicineController {
     @PutMapping(path = "/update",
     produces = {"application/json"},
     consumes = {"application/json"})
-    public void updateMedicine(@RequestBody Medicine medicine){
-        medicineService.updateMedicine(medicine,2);
+    public Medicine updateMedicine(@RequestBody Medicine medicine){
+        return this.medicineService.updateMedicine(medicine,2);
     }
 
     @DeleteMapping(path = "/delete/{id}")

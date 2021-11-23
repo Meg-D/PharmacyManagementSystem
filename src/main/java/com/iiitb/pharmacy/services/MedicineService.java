@@ -9,7 +9,7 @@ public interface MedicineService {
 
     public Medicine getMedicineByName(String medicineName);
     public List<Medicine> getAllMedicines();
-    public void addMedicine(Medicine medicine);
-    public void updateMedicine(Medicine medicine, int quantity);
+    public Medicine addMedicine(Medicine medicine);
+    public Medicine updateMedicine(Medicine medicine, int quantity);
     public void deleteMedicine(Integer medicine_id);
 }

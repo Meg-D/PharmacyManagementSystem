@@ -25,12 +25,12 @@ public class MedicineServiceImpl implements MedicineService {
         return medicineList;
     }
 
-    public void addMedicine(Medicine medicine){
+    public Medicine addMedicine(Medicine medicine){
         // check if the medicine exists
         Optional<Medicine> med = medicineDAO.findByName(medicine.getName());
 
         // doesn't : add a new medicine
-        if(med.isEmpty()) medicineDAO.save(medicine);
+        if(med.isEmpty()) return medicineDAO.save(medicine);
 
         // does : check the cost
         // if medicine has the same cost update the existing entry
@@ -38,17 +38,17 @@ public class MedicineServiceImpl implements MedicineService {
             int existingStock = med.get().getQuantity_left();
             int updatedStock = existingStock + medicine.getQuantity_left();
             medicine.setQuantity_left(existingStock+updatedStock);
-            medicineDAO.save(medicine);
+            return medicineDAO.save(medicine);
         }
 
         // else make a new entry
-        else medicineDAO.save(medicine);
+        else return medicineDAO.save(medicine);
     }
 
     // to update the medicine stock. update quantity_left
-    public void updateMedicine(Medicine medicine, int quantity){
+    public Medicine updateMedicine(Medicine medicine, int quantity){
             medicine.setQuantity_left(medicine.getQuantity_left() - quantity);
-            medicineDAO.save(medicine);
+            return medicineDAO.save(medicine);
     }
 
 
