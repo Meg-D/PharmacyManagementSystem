@@ -14,6 +14,6 @@ public interface ItemDAO extends JpaRepository<Item,Integer> {
     @Query("SELECT i from Item i WHERE i.sale_id= :saleId")
     public List<Item> findAllBySale_id_sale_id(@Param("saleId") Sale sale_id);
 
-    @Query("SELECT i.amount from Item i where i.sale_id=: sale_id")
-    public List<Double> getAmountBySaleId(@Param("sale_id") Integer sale_id);
+    @Query("SELECT i.amount from Item i WHERE i.sale_id= :saleId")
+    public List<Double> findAmountBySale_id_sale_id(@Param("saleId") Sale sale_id);
 }

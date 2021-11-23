@@ -38,13 +38,19 @@ public class SalesServiceImpl implements SalesService {
     public Sale addSale(Sales sale){
         User u = userDAO.getById(sale.getUser_id());
         Customer c = customerDAO.getById(sale.getCust_id());
-        Double amount = 0.0;
-        List<Double> itemsAmount = itemDAO.getAmountBySaleId(sale.getSale_id());
-        for (double amt: itemsAmount) {
-            System.out.print(amt+ ' ');
-        }
-        Sale s = new Sale(sale.getSale_id(), amount, sale.getNet_diff(), sale.getDate(), c,u);
+        Sale s = new Sale(sale.getSale_id(), 0.0, sale.getNet_diff(), sale.getDate(),c,u);
         return saleDAO.save(s);
+    }
+
+    @Override
+    public Double getTotal(int saleId) {
+        Sale obj = new Sale();
+        obj.setSale_id(saleId);
+        Double bill = 0.0;
+        List<Double> amounts = itemDAO.findAmountBySale_id_sale_id(obj);
+        for(Double amt:amounts)
+            bill +=amt;
+        return bill;
     }
 
     public Optional<List<Sale>> getSaleByUserId(int userId){

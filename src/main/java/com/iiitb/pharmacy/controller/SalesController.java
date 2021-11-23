@@ -22,13 +22,18 @@ public class SalesController {
 //        salesService.getNetDifference();
 //    }
 
+    @GetMapping("/generateBill/{saleId}")
+    public Double getTotal(@PathVariable String saleId){
+        return salesService.getTotal(Integer.parseInt(saleId));
+    }
+
     @GetMapping("/details/{saleId}")
     public Sale viewSaleDetails(@PathVariable String saleId){
         return salesService.viewSaleDetails(Integer.parseInt(saleId));
     }
 
     @PostMapping("/add")
-    public Sale addSale(Sales sale){
+    public Sale addSale(@RequestBody Sales sale){
         return salesService.addSale(sale);
     }
 
