@@ -2,7 +2,7 @@ package com.iiitb.pharmacy.controller;
 
 
 import com.iiitb.pharmacy.beans.User;
-import com.iiitb.pharmacy.dto.Users;
+import com.iiitb.pharmacy.dto.Password;
 import com.iiitb.pharmacy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,10 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User login(@RequestBody Users user){
+    public User login(@RequestBody User user){
         return userService.login(user);
     }
+
+    @PostMapping("/updatePassword")
+    public String changePassword(@RequestBody Password password){return userService.changePassword(password.getUsername(), password.getOld(), password.getNewp(), password.getNewp2());}
 }

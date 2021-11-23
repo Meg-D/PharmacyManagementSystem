@@ -4,6 +4,8 @@ import java.util.*;
 import com.iiitb.pharmacy.beans.Medicine;
 import com.iiitb.pharmacy.services.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,15 +37,20 @@ public class MedicineController {
 
     // not required here
     // while adding item, the updateMedicine service will be called directly
-    @PostMapping(path = "/update",
+    @PutMapping(path = "/update",
     produces = {"application/json"},
     consumes = {"application/json"})
     public void updateMedicine(@RequestBody Medicine medicine){
         medicineService.updateMedicine(medicine,2);
     }
 
-    @DeleteMapping(path = "/delete")
-    public void deleteMedicine(@RequestBody Medicine medicine){
-        medicineService.deleteMedicine(medicine);
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteMedicine(@PathVariable String id){
+        try{
+            this.medicineService.deleteMedicine(Integer.parseInt(id));
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

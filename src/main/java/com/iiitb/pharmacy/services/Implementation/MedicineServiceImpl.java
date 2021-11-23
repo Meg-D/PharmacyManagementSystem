@@ -52,8 +52,8 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
 
-    public void deleteMedicine(Medicine medicine){
-        medicineDAO.delete(medicine);
+    public void deleteMedicine(Integer medicine_id){
+        medicineDAO.deleteById(medicine_id);
     }
 
 }

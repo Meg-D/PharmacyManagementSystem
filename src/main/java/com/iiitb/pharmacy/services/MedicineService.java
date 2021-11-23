@@ -11,5 +11,5 @@ public interface MedicineService {
     public List<Medicine> getAllMedicines();
     public void addMedicine(Medicine medicine);
     public void updateMedicine(Medicine medicine, int quantity);
-    public void deleteMedicine(Medicine medicine);
+    public void deleteMedicine(Integer medicine_id);
 }
