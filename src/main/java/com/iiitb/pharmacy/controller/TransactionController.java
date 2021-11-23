@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/transactions")
+@RequestMapping("/transaction")
 @RestController
 public class TransactionController {
     @Autowired
