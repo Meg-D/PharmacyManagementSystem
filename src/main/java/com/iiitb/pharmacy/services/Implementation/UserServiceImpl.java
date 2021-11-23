@@ -2,6 +2,7 @@ package com.iiitb.pharmacy.services.Implementation;
 
 import com.iiitb.pharmacy.beans.User;
 import com.iiitb.pharmacy.dao.UserDAO;
+import com.iiitb.pharmacy.dto.Users;
 import com.iiitb.pharmacy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User user){
+    public User login(Users user){
         String username = user.getUsername();
         String password = user.getPassword();
         return userDAO.findByUsernameEqualsAndPasswordEquals(username,password);

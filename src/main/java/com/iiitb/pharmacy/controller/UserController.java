@@ -2,6 +2,7 @@ package com.iiitb.pharmacy.controller;
 
 
 import com.iiitb.pharmacy.beans.User;
+import com.iiitb.pharmacy.dto.Users;
 import com.iiitb.pharmacy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User login(@RequestBody User user){
+    public User login(@RequestBody Users user){
         return userService.login(user);
     }
 }
