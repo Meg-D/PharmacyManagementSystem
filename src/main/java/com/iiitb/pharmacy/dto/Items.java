@@ -1,20 +1,20 @@
 package com.iiitb.pharmacy.dto;
 
 public class Items {
-    private Integer item_id;
+    //private Integer item_id;
     private Integer quantity;
     private Integer discount;
     private Integer med_id;
     private Integer cust_id;
     private Integer sale_id;
 
-    public Integer getItem_id() {
-        return item_id;
-    }
-
-    public void setItem_id(Integer item_id) {
-        this.item_id = item_id;
-    }
+//   public Integer getItem_id() {
+//        return item_id;
+//    }
+//
+//    public void setItem_id(Integer item_id) {
+//        this.item_id = item_id;
+//    }
 
     public Integer getQuantity() {
         return quantity;

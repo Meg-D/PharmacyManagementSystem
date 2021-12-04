@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
         Double amount = medicineDAO.findById(item.getMed_id()).get().getCost() * 0.8;
         Customer c = customerDAO.findById(item.getCust_id()).get();
         Sale s = saleDAO.findById(item.getSale_id()).get();
-        Item i = new Item(item.getItem_id(),item.getQuantity(),amount,item.getDiscount(),m,c,s);
+        Item i = new Item(item.getQuantity(),amount,item.getDiscount(),m,c,s);
         return itemDAO.save(i);
     }
 

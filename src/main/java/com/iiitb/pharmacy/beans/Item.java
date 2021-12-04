@@ -36,4 +36,13 @@ public class Item {
 
     @ManyToOne
     private Sale sale_id;
+
+    public Item(Integer quantity, Double amount, Integer discount, Medicine m, Customer c, Sale s) {
+        this.quantity=quantity;
+        this.amount=amount;
+        this.discount=discount;
+        this.med_id=m;
+        this.cust_id=c;
+        this.sale_id=s;
+    }
 }
