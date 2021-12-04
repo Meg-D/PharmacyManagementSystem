@@ -37,5 +37,14 @@ public class Transaction {
 
     @ManyToOne
     private User user_id;
+
+    public Transaction(Integer quantity, Double price, String formattedDate, Medicine m, Vendor v, User u) {
+        this.quantity=quantity;
+        this.date_of_purchase=formattedDate;
+        this.price=price;
+        this.med_id=m;
+        this.ven_id=v;
+        this.user_id=u;
+    }
 }
 

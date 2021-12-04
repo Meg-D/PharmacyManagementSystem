@@ -34,10 +34,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item addItem(Items item) {
         Medicine m = medicineDAO.findById(item.getMed_id()).get();
-        Double amount = medicineDAO.findById(item.getMed_id()).get().getCost() * 0.8;
-        Customer c = customerDAO.findById(item.getCust_id()).get();
+        Double amount = medicineDAO.findById(item.getMed_id()).get().getCost();
+        //Customer c = customerDAO.findById(item.getCust_id()).get();
+        Double discount = amount * item.getDiscount() * 0.01;
         Sale s = saleDAO.findById(item.getSale_id()).get();
-        Item i = new Item(item.getQuantity(),amount,item.getDiscount(),m,c,s);
+        Item i = new Item(item.getQuantity(),amount,discount,m,s);
         return itemDAO.save(i);
     }
 

@@ -13,6 +13,8 @@ import com.iiitb.pharmacy.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +61,10 @@ public class TransactionServiceImpl implements TransactionService {
         Vendor v = vendorDAO.getById(transaction.getVendor_id());
         Medicine m = medicineDAO.getById(transaction.getMedicine_id());
         User u = userDAO.getById(transaction.getUser_id());
-        Transaction t = new Transaction(transaction.getTransaction_id(),transaction.getQuantity(),transaction.getPrice(),transaction.getDate_of_purchase(),m,v,u);
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String formattedDate = formatter.format(date);
+        Transaction t = new Transaction(transaction.getQuantity(),transaction.getPrice(),formattedDate,m,v,u);
         return transactionDAO.save(t);
     }
 }

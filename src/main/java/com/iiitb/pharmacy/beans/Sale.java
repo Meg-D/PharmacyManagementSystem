@@ -34,4 +34,11 @@ public class Sale {
 
     @ManyToOne
     private User user_id;
+
+    public Sale(double v, Double net_diff, Customer c, User u) {
+        this.amount=v;
+        this.net_diff=net_diff;
+        this.cust_id=c;
+        this.user_id=u;
+    }
 }

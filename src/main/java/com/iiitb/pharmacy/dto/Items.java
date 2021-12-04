@@ -3,9 +3,9 @@ package com.iiitb.pharmacy.dto;
 public class Items {
     //private Integer item_id;
     private Integer quantity;
-    private Integer discount;
+    private Double discount;
     private Integer med_id;
-    private Integer cust_id;
+    //private Integer cust_id;
     private Integer sale_id;
 
 //   public Integer getItem_id() {
@@ -19,18 +19,10 @@ public class Items {
     public Integer getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
 
     public Integer getMed_id() {
         return med_id;
@@ -40,13 +32,13 @@ public class Items {
         this.med_id = med_id;
     }
 
-    public Integer getCust_id() {
-        return cust_id;
-    }
+    //public Integer getCust_id() {
+    //    return cust_id;
+    //}
 
-    public void setCust_id(Integer cust_id) {
-        this.cust_id = cust_id;
-    }
+    //public void setCust_id(Integer cust_id) {
+       // this.cust_id = cust_id;
+    //}
 
     public Integer getSale_id() {
         return sale_id;

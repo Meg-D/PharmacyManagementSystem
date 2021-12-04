@@ -26,23 +26,23 @@ public class Item {
     private Double amount;
 
     @Column(nullable = false)
-    private Integer discount;
+    private Double discount;
 
     @ManyToOne
     private Medicine med_id;
 
-    @ManyToOne
-    private Customer cust_id;
+//    @ManyToOne
+//    private Customer cust_id;
 
     @ManyToOne
     private Sale sale_id;
 
-    public Item(Integer quantity, Double amount, Integer discount, Medicine m, Customer c, Sale s) {
+    public Item(Integer quantity, Double amount, Double discount, Medicine m, Sale s) {
         this.quantity=quantity;
         this.amount=amount;
         this.discount=discount;
         this.med_id=m;
-        this.cust_id=c;
+       // this.cust_id=c;
         this.sale_id=s;
     }
 }

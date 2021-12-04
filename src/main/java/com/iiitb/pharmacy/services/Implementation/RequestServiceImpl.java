@@ -33,9 +33,8 @@ public class RequestServiceImpl implements RequestService {
         User u = userDAO.findById(request.getAccepted_by()).get();
         Vendor v = vendorDAO.findById(request.getVendor_id()).get();
         Date date = new Date();
-        String strDateFormat = "hh:mm:ss a";
-        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-        String formattedDate= dateFormat.format(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String formattedDate = formatter.format(date);
 
         r.setVendor_id(v);
         r.setAccepted_by(u);
