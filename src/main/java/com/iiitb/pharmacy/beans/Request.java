@@ -43,5 +43,17 @@ public class Request {
 
     @ManyToOne
     private Vendor vendor_id;
+
+    public Request(String medicine_name, Integer quantity, int i, String formattedDate, User u) {
+        this.medicine_name=medicine_name;
+        this.quantity=quantity;
+        this.status=i;
+        this.order_date=formattedDate;
+        this.delivery_date=null;
+        this.placed_by=u;
+        this.accepted_by=null;
+        this.vendor_id=null;
+
+    }
 }
 

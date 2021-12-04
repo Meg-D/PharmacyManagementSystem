@@ -1,6 +1,7 @@
 package com.iiitb.pharmacy.dto;
 
 public class Requests {
+    private Integer request_id;
     private String medicine_name;
     private Integer quantity;
     private Integer placed_by;
@@ -45,6 +46,14 @@ public class Requests {
 
     public void setVendor_id(Integer vendor_id) {
         this.vendor_id = vendor_id;
+    }
+
+    public Integer getRequest_id() {
+        return request_id;
+    }
+
+    public void setRequest_id(Integer request_id) {
+        this.request_id = request_id;
     }
 
     public Requests(String medicine_name, Integer quantity, Integer placed_by) {

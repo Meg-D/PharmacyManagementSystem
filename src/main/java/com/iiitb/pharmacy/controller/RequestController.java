@@ -2,6 +2,7 @@ package com.iiitb.pharmacy.controller;
 
 import com.iiitb.pharmacy.beans.Request;
 import com.iiitb.pharmacy.beans.Transaction;
+import com.iiitb.pharmacy.dto.Requests;
 import com.iiitb.pharmacy.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class RequestController {
 
     //add request
     @PostMapping(path="/add",consumes = "application/JSON")
-    public Request addRequest(@RequestBody Request request){
+    public Request addRequest(@RequestBody Requests request){
         return this.requestService.addRequest(request);
     }
 
@@ -36,7 +37,7 @@ public class RequestController {
 
     //update request
     @PutMapping(path= "/update",consumes = "application/JSON")
-    public Request updateRequest(@RequestBody Request request){
+    public Request updateRequest(@RequestBody Requests request){
         return this.requestService.updateRequest(request);
     }
 }
