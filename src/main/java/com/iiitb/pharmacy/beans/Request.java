@@ -30,10 +30,10 @@ public class Request {
     private Integer status;
 
     @Column(nullable = false)
-    private Date order_date;
+    private String order_date;
 
     @Column
-    private Date delivery_date;
+    private String delivery_date;
 
     @ManyToOne
     private User placed_by;
