@@ -26,6 +26,7 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     public Medicine addMedicine(Medicine medicine){
+        medicine.setCost(medicine.getCost()*1.2);
         // check if the medicine exists
         Optional<Medicine> med = medicineDAO.findByName(medicine.getName());
 

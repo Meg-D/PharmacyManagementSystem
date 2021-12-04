@@ -59,7 +59,7 @@ public class SalesServiceImpl implements SalesService {
             bill += (item.getAmount() - item.getDiscount())*item.getQuantity();
         }
         s.setAmount(bill);
-        s.setNet_diff(total - bill);
+        s.setNet_diff(bill- total);
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formattedDate = formatter.format(date);
