@@ -3,7 +3,7 @@ package com.iiitb.pharmacy.dto;
 public class Transactions {
     private Integer quantity;
     private Double price;
-    private Integer medicine_id;
+    private String medicine_name;
     private Integer vendor_id;
     private Integer user_id;
 
@@ -24,12 +24,12 @@ public class Transactions {
         this.price = price;
     }
 
-    public Integer getMedicine_id() {
-        return medicine_id;
+    public String getMedicine_name() {
+        return medicine_name;
     }
 
-    public void setMedicine_id(Integer medicine_id) {
-        this.medicine_id = medicine_id;
+    public void setMedicine_name(String medicine_name) {
+        this.medicine_name = medicine_name;
     }
 
     public Integer getVendor_id() {
@@ -48,10 +48,10 @@ public class Transactions {
         this.user_id = user_id;
     }
 
-    public Transactions(Integer quantity, Double price, Integer medicine_id, Integer vendor_id, Integer user_id) {
+    public Transactions(Integer quantity, Double price, String medicine_name, Integer vendor_id, Integer user_id) {
         this.quantity = quantity;
         this.price = price;
-        this.medicine_id = medicine_id;
+        this.medicine_name = medicine_name;
         this.vendor_id = vendor_id;
         this.user_id = user_id;
     }

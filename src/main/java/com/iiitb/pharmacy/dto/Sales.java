@@ -2,7 +2,7 @@ package com.iiitb.pharmacy.dto;
 
 public class Sales {
     //private Integer sale_id;
-    private Double net_diff;
+    // private Double net_diff;
     private Integer cust_id;
     private Integer user_id;
 
@@ -10,9 +10,7 @@ public class Sales {
 //        return sale_id;
 //    }
 
-    public Double getNet_diff() {
-        return net_diff;
-    }
+
 
     public Integer getCust_id() {
         return cust_id;
@@ -22,9 +20,9 @@ public class Sales {
         return user_id;
     }
 
-    public Sales(Double net_diff, Integer cust_id, Integer user_id) {
+    public Sales(Integer cust_id, Integer user_id) {
        // this.sale_id = sale_id;
-        this.net_diff = net_diff;
+       // this.net_diff = net_diff;
         this.cust_id = cust_id;
         this.user_id = user_id;
     }

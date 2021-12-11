@@ -52,7 +52,10 @@ public class MedicineServiceImpl implements MedicineService {
             return medicineDAO.save(medicine);
     }
 
-
+    public Medicine updateMedicineByTransaction(Medicine medicine,int quantity){
+        medicine.setQuantity_left(medicine.getQuantity_left() + quantity);
+        return medicineDAO.save(medicine);
+    }
     public void deleteMedicine(Integer medicine_id){
         medicineDAO.deleteById(medicine_id);
     }

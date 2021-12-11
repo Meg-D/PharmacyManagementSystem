@@ -9,6 +9,7 @@ import com.iiitb.pharmacy.dao.TransactionDAO;
 import com.iiitb.pharmacy.dao.UserDAO;
 import com.iiitb.pharmacy.dao.VendorDAO;
 import com.iiitb.pharmacy.dto.Transactions;
+import com.iiitb.pharmacy.services.MedicineService;
 import com.iiitb.pharmacy.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
     private UserDAO userDAO;
     @Autowired
     private MedicineDAO medicineDAO;
+    @Autowired
+    private MedicineService medicineService;
 
     @Override
     public List<Transaction> getTransactions() {
@@ -58,13 +61,25 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction addTransaction(Transactions transaction) {
-        Vendor v = vendorDAO.getById(transaction.getVendor_id());
-        Medicine m = medicineDAO.getById(transaction.getMedicine_id());
-        User u = userDAO.getById(transaction.getUser_id());
+
+       // transaction.setPrice(transaction.getPrice());
+        //Medicine m = medicineDAO.getById(transaction.getMedicine_id());
+        Medicine med;
+        Optional<Medicine> m = medicineDAO.findByNameAndCost(transaction.getMedicine_name(),transaction.getPrice());
+        if(m.isEmpty()){
+            Medicine m1 = new Medicine(transaction.getMedicine_name(),transaction.getQuantity(),transaction.getPrice()*1.2);
+            med = medicineService.addMedicine(m1);
+        }
+        else{
+            med = m.get();
+            medicineService.updateMedicineByTransaction(med,transaction.getQuantity());
+        }
+        User u = userDAO.findById(transaction.getUser_id()).get();
+        Vendor v = vendorDAO.findById(transaction.getVendor_id()).get();
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formattedDate = formatter.format(date);
-        Transaction t = new Transaction(transaction.getQuantity(),transaction.getPrice(),formattedDate,m,v,u);
+        Transaction t = new Transaction(transaction.getQuantity(),transaction.getPrice(),formattedDate,med,v,u);
         return transactionDAO.save(t);
     }
 }

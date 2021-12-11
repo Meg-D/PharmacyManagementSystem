@@ -27,5 +27,11 @@ public class Medicine {
 
     @Column(nullable = false)
     private Double cost;
+
+    public Medicine(String name, Integer quantity_left, Double cost) {
+        this.name = name;
+        this.quantity_left = quantity_left;
+        this.cost = cost;
+    }
 }
 
