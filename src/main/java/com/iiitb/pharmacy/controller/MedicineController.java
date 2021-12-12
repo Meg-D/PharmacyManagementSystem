@@ -41,7 +41,7 @@ public class MedicineController {
     produces = {"application/json"},
     consumes = {"application/json"})
     public Medicine updateMedicine(@RequestBody Medicine medicine){
-        return this.medicineService.updateMedicine(medicine,2);
+        return this.medicineService.updateMedicine(medicine, medicine.getQuantity_left());
     }
 
     @DeleteMapping(path = "/delete/{id}")

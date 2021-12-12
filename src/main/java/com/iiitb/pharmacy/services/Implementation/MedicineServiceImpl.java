@@ -48,10 +48,15 @@ public class MedicineServiceImpl implements MedicineService {
 
     // to update the medicine stock. update quantity_left
     public Medicine updateMedicine(Medicine medicine, int quantity){
-            medicine.setQuantity_left(medicine.getQuantity_left() - quantity);
+            medicine.setQuantity_left(quantity);
             return medicineDAO.save(medicine);
     }
 
+    public Medicine updateMedicineBySale(Medicine medicine,int quantity){
+        if(quantity>medicine.getQuantity_left()) return null;
+        medicine.setQuantity_left(medicine.getQuantity_left() - quantity);
+        return medicineDAO.save(medicine);
+    }
     public Medicine updateMedicineByTransaction(Medicine medicine,int quantity){
         medicine.setQuantity_left(medicine.getQuantity_left() + quantity);
         return medicineDAO.save(medicine);

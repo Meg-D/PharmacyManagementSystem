@@ -10,6 +10,7 @@ import com.iiitb.pharmacy.dao.MedicineDAO;
 import com.iiitb.pharmacy.dao.SaleDAO;
 import com.iiitb.pharmacy.dto.Items;
 import com.iiitb.pharmacy.services.ItemService;
+import com.iiitb.pharmacy.services.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +31,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private CustomerDAO customerDAO;
+    @Autowired
+    private MedicineService medicineService;
 
     @Override
     public Item addItem(Items item) {
         Medicine m = medicineDAO.findById(item.getMed_id()).get();
+        Medicine test = medicineService.updateMedicineBySale(m, item.getQuantity());
+        if (test==null) return null;
         Double amount = medicineDAO.findById(item.getMed_id()).get().getCost();
         //Customer c = customerDAO.findById(item.getCust_id()).get();
         Double discount = amount * item.getDiscount() * 0.01;
