@@ -7,6 +7,15 @@ public class Requests {
     private Integer placed_by;
     private Integer accepted_by;
     private Integer vendor_id;
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public String getMedicine_name() {
         return medicine_name;
@@ -62,5 +71,6 @@ public class Requests {
         this.placed_by = placed_by;
         this.accepted_by = null;
         this.vendor_id = null;
+        this.price = null;
     }
 }

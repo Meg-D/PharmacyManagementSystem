@@ -1,13 +1,12 @@
 package com.iiitb.pharmacy.services.Implementation;
 
-import com.iiitb.pharmacy.beans.Request;
-import com.iiitb.pharmacy.beans.User;
-import com.iiitb.pharmacy.beans.Vendor;
-import com.iiitb.pharmacy.dao.RequestDAO;
-import com.iiitb.pharmacy.dao.UserDAO;
-import com.iiitb.pharmacy.dao.VendorDAO;
+import com.iiitb.pharmacy.beans.*;
+import com.iiitb.pharmacy.dao.*;
 import com.iiitb.pharmacy.dto.Requests;
+import com.iiitb.pharmacy.dto.Transactions;
+import com.iiitb.pharmacy.services.MedicineService;
 import com.iiitb.pharmacy.services.RequestService;
+import com.iiitb.pharmacy.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,16 @@ public class RequestServiceImpl implements RequestService {
 
     @Autowired
     private VendorDAO vendorDAO;
+
+    @Autowired
+    private MedicineDAO medicineDAO;
+
+    @Autowired
+    private TransactionDAO transactionDAO;
+
+    @Autowired
+    private MedicineService medicineService;
+
     @Override
     public Request updateRequest(Requests request) {
         Request r = requestDAO.findById(request.getRequest_id()).get();
@@ -35,11 +44,24 @@ public class RequestServiceImpl implements RequestService {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formattedDate = formatter.format(date);
-
         r.setVendor_id(v);
         r.setAccepted_by(u);
         r.setStatus(1);
         r.setDelivery_date(formattedDate);
+
+        Optional<Medicine> meds= medicineDAO.findByNameAndCost(r.getMedicine_name(), request.getPrice());
+        Medicine m;
+        System.out.println(r.getMedicine_name());
+        if(meds.isEmpty()){
+            m = new Medicine(r.getMedicine_name(), r.getQuantity(), request.getPrice());
+            medicineDAO.save(m);
+        }
+        else{
+            m = meds.get();
+            medicineService.updateMedicine(m, request.getQuantity());
+        }
+        Transaction t = new Transaction(r.getQuantity(),request.getPrice(),formattedDate,m,v,u);
+        transactionDAO.save(t);
         return requestDAO.save(r);
     }
 
