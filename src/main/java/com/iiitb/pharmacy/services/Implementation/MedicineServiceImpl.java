@@ -62,7 +62,9 @@ public class MedicineServiceImpl implements MedicineService {
         return medicineDAO.save(medicine);
     }
     public void deleteMedicine(Integer medicine_id){
-        medicineDAO.deleteById(medicine_id);
+        Medicine m = medicineDAO.findById(medicine_id).get();
+        m.setQuantity_left(0);
+        medicineDAO.save(m);
     }
 
 }

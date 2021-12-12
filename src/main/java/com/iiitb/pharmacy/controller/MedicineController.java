@@ -44,13 +44,8 @@ public class MedicineController {
         return this.medicineService.updateMedicine(medicine, medicine.getQuantity_left());
     }
 
-    @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteMedicine(@PathVariable String id){
-        try{
-            this.medicineService.deleteMedicine(Integer.parseInt(id));
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PutMapping(path = "/delete/{id}")
+    public void deleteMedicine(@PathVariable String id) {
+        this.medicineService.deleteMedicine(Integer.parseInt(id));
     }
 }
