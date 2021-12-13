@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-    // number will be used as the primary key
+    // return customer corresponding to the given number
     public Customer getCustomerByContactNumber(String number){
         Optional<Customer> obj = customerDAO.findByPhone(number);
         return obj.get();

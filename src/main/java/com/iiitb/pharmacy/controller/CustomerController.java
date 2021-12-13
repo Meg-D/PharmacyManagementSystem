@@ -14,6 +14,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    // register a new customer
     @PostMapping(path = "/add",
     consumes = {"application/json"},
     produces = {"application/json"})
@@ -21,6 +22,7 @@ public class CustomerController {
         return customerService.addCustomer(customer);
     }
 
+    // return customer identified via phone number
     @GetMapping("/getCustomer/{phoneNumber}")
     public Customer getCustomerByContactNumber(@PathVariable String phoneNumber){
         return customerService.getCustomerByContactNumber(phoneNumber);

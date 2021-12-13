@@ -13,7 +13,6 @@ import com.iiitb.pharmacy.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,63 +33,61 @@ public class SalesServiceImpl implements SalesService {
     @Autowired
     private ItemDAO itemDAO;
 
-    //public void getNetDifference(){}
-//    public Sale viewSaleDetails(int saleId){
-//        return saleDAO.findById(saleId).get();
-//    }
-
+    // add a new Sale
     public Sale addSale(Sales sale){
-        User u = userDAO.findById(sale.getUser_id()).get();
-        Customer c = customerDAO.findById(sale.getCust_id()).get();
+        User user = userDAO.findById(sale.getUser_id()).get();
+        Customer customer = customerDAO.findById(sale.getCust_id()).get();
 
-        Sale s = new Sale(0.0, 0.0,c,u);
-        return saleDAO.save(s);
+        Sale new_sale = new Sale(0.0, 0.0,customer,user);
+        return saleDAO.save(new_sale);
     }
 
+    // generate Sale details after all the items have been added
     @Override
     public Sale makeSale(int sale_id) {
-        Sale s = saleDAO.findById(sale_id).get();
-        Double bill = 0.0; // customer pay
-        Double total = 0.0; // without discount
-       // List<double[2]> amounts = itemDAO.findAmountBySale_id_sale_id(s);
-        List<Item> items = itemDAO.findAllBySale_id_sale_id(s);
+
+        // get sale corresponding to the given sale id
+        Sale new_sale = saleDAO.findById(sale_id).get();
+
+        // customer needs to pay. Includes discount if any
+        Double bill = 0.0;
+
+        // Actual cost (without discount)
+        Double total = 0.0;
+
+        // find all the items associated with the given sale id
+        List<Item> items = itemDAO.findAllBySale_id_sale_id(new_sale);
+
+        // calculate total and bill amount
         for(Item item: items) {
             total += item.getAmount() * item.getQuantity();
             bill += (item.getAmount() - item.getDiscount())*item.getQuantity();
         }
-        s.setAmount(bill);
-        s.setNet_diff(bill- total);
+
+        new_sale.setAmount(bill);
+        new_sale.setNet_diff(bill- total);
+
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formattedDate = formatter.format(date);
-        s.setDate(formattedDate);
-        return saleDAO.save(s);
+        new_sale.setDate(formattedDate);
+
+        return saleDAO.save(new_sale);
     }
 
-//    @Override
-//    public Double getTotal(int saleId) {
-//        Sale obj = new Sale();
-//        obj.setSale_id(saleId);
-//        Double bill = 0.0;
-//        List<Double> amounts = itemDAO.findAmountBySale_id_sale_id(obj);
-//        for(Double amt:amounts)
-//            bill +=amt;
-//        return bill;
-//    }
 
+    // get list of sales made by a user
     public Optional<List<Sale>> getSaleByUserId(int userId){
-        Optional<User> u = userDAO.findById(userId);
-        if(!u.isEmpty())
-            return saleDAO.findByUser(u.get());
+        Optional<User> user = userDAO.findById(userId);
+        if(!user.isEmpty()) return saleDAO.findByUser(user.get());
         return null;
     }
 
+    // get customer's purchase history
     public Optional<List<Sale>> getSaleByCustomerNumber(String phone){
-        Optional<Customer> c = customerDAO.findByPhone(phone);
-        if(!c.isEmpty())
-            return saleDAO.findByCustomer(c.get());
+        Optional<Customer> customer = customerDAO.findByPhone(phone);
+        if(!customer.isEmpty()) return saleDAO.findByCustomer(customer.get());
         return null;
     }
 
-   // public void generateBill(){}
 }

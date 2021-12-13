@@ -31,9 +31,6 @@ public class Item {
     @ManyToOne
     private Medicine med_id;
 
-//    @ManyToOne
-//    private Customer cust_id;
-
     @ManyToOne
     private Sale sale_id;
 
@@ -42,7 +39,6 @@ public class Item {
         this.amount=amount;
         this.discount=discount;
         this.med_id=m;
-       // this.cust_id=c;
         this.sale_id=s;
     }
 }

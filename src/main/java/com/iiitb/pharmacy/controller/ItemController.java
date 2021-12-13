@@ -1,7 +1,6 @@
 package com.iiitb.pharmacy.controller;
 
 import com.iiitb.pharmacy.beans.Item;
-import com.iiitb.pharmacy.beans.Transaction;
 import com.iiitb.pharmacy.dto.Items;
 import com.iiitb.pharmacy.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +14,17 @@ import java.util.List;
 @RequestMapping("/item")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ItemController {
+
     @Autowired
     private ItemService itemService;
 
-    //add item
+    // add item
     @PostMapping(path="/add",consumes = "application/JSON")
     public Item addItem(@RequestBody Items item){
         return this.itemService.addItem(item);
     }
 
-    //delete item
+    // delete item
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteItem(@PathVariable String id){
         try{
@@ -35,7 +35,7 @@ public class ItemController {
         }
     }
 
-    //get all items
+    // get all items associated with a sale id
     @GetMapping("/getall/{saleid}")
     public List<Item> getItemsBySaleId(@PathVariable String saleid){
         return this.itemService.getItemsBySaleId(Integer.parseInt(saleid));

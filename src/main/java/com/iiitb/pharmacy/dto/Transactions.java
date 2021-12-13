@@ -11,7 +11,6 @@ public class Transactions {
     public Integer getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -19,7 +18,6 @@ public class Transactions {
     public Double getPrice() {
         return price;
     }
-
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -27,7 +25,6 @@ public class Transactions {
     public String getMedicine_name() {
         return medicine_name;
     }
-
     public void setMedicine_name(String medicine_name) {
         this.medicine_name = medicine_name;
     }
@@ -35,7 +32,6 @@ public class Transactions {
     public Integer getVendor_id() {
         return vendor_id;
     }
-
     public void setVendor_id(Integer vendor_id) {
         this.vendor_id = vendor_id;
     }
@@ -43,7 +39,6 @@ public class Transactions {
     public Integer getUser_id() {
         return user_id;
     }
-
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }

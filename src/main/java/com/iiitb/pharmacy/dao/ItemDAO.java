@@ -5,10 +5,11 @@ import com.iiitb.pharmacy.beans.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.Optional;
 
+@Repository
 public interface ItemDAO extends JpaRepository<Item,Integer> {
 
     @Query("SELECT i from Item i WHERE i.sale_id= :saleId")
