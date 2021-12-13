@@ -5,9 +5,7 @@ import com.iiitb.pharmacy.dao.VendorDAO;
 import com.iiitb.pharmacy.services.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.iiitb.pharmacy.utils.generateDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,9 +40,7 @@ public class VendorServiceImpl implements VendorService {
     // add a new vendor
     @Override
     public Vendor addVendor(Vendor vendor) {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = formatter.format(date);
+        String formattedDate = new generateDate().getFormattedDate("dd/MM/yyyy HH:mm:ss");
         vendor.setStart_date(formattedDate);
         return vendorDAO.save(vendor);
     }

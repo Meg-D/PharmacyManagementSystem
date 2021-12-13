@@ -7,10 +7,7 @@ import com.iiitb.pharmacy.services.MedicineService;
 import com.iiitb.pharmacy.services.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.iiitb.pharmacy.utils.generateDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +40,8 @@ public class RequestServiceImpl implements RequestService {
         User u = userDAO.findById(request.getAccepted_by()).get();
         Vendor v = vendorDAO.findById(request.getVendor_id()).get();
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = formatter.format(date);
+
+        String formattedDate = new generateDate().getFormattedDate("dd/MM/yyyy HH:mm:ss");
 
         // update fields corresponding to the request being fulfilled
         db_request.setVendor_id(v);
@@ -99,11 +95,8 @@ public class RequestServiceImpl implements RequestService {
     // add a new request
     @Override
     public Request addRequest(Requests request) {
-        Date date = new Date();
-        String strDateFormat = "hh:mm:ss a";
-        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-        String formattedDate= dateFormat.format(date);
 
+        String formattedDate = new generateDate().getFormattedDate("hh:mm:ss a");
         User user = userDAO.findById(request.getPlaced_by()).get();
         Request new_request = new Request(request.getMedicine_name(),request.getQuantity(),0,formattedDate,user);
         return requestDAO.save(new_request);
