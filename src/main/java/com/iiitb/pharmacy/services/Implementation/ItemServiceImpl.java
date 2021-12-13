@@ -10,6 +10,7 @@ import com.iiitb.pharmacy.dto.Items;
 import com.iiitb.pharmacy.services.ItemService;
 import com.iiitb.pharmacy.services.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,23 +34,28 @@ public class ItemServiceImpl implements ItemService {
 
     // add an item
     @Override
-    public Item addItem(Items item) {
+    public ResponseEntity<String> addItem(Items item) {
         Medicine medicine = medicineDAO.findById(item.getMed_id()).get();
-        Medicine test = medicineService.updateMedicineBySale(medicine, item.getQuantity());
-        if (test==null) return null;
+        Medicine db_medicine = medicineService.updateMedicineBySale(medicine, item.getQuantity());
+        // quantity required is more than the stock
+        if (db_medicine==null) return ResponseEntity.badRequest().body("Insufficient stock");
+
         Double amount = medicineDAO.findById(item.getMed_id()).get().getCost();
         Double discount = amount * item.getDiscount() * 0.01;
         Sale s = saleDAO.findById(item.getSale_id()).get();
         Item i = new Item(item.getQuantity(),amount,discount,medicine,s);
-        System.out.println(i);
-        return itemDAO.save(i);
+        itemDAO.save(i);
+
+        return ResponseEntity.ok("Item added");
     }
 
+    // delete an item
     @Override
     public void deleteItem(int id) {
         itemDAO.deleteById(id);
     }
 
+    // get list of all the items for a given sale
     @Override
     public List<Item> getItemsBySaleId(int saleId) {
         Optional<Sale> sale = saleDAO.findById(saleId);

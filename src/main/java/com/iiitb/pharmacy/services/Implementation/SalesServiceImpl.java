@@ -12,9 +12,7 @@ import com.iiitb.pharmacy.dto.Sales;
 import com.iiitb.pharmacy.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.iiitb.pharmacy.utils.generateDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,9 +65,7 @@ public class SalesServiceImpl implements SalesService {
         new_sale.setAmount(bill);
         new_sale.setNet_diff(bill- total);
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = formatter.format(date);
+        String formattedDate = new generateDate().getFormattedDate("dd/MM/yyyy HH:mm:ss");
         new_sale.setDate(formattedDate);
 
         return saleDAO.save(new_sale);
