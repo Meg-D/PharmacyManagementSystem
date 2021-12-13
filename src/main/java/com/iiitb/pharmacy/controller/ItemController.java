@@ -20,7 +20,7 @@ public class ItemController {
 
     // add item
     @PostMapping(path="/add",consumes = "application/JSON")
-    public Item addItem(@RequestBody Items item){
+    public ResponseEntity<String> addItem(@RequestBody Items item){
         return this.itemService.addItem(item);
     }
 
