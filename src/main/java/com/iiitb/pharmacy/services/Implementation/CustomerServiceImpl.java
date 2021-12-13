@@ -26,6 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     // return customer corresponding to the given number
     public Customer getCustomerByContactNumber(String number){
         Optional<Customer> obj = customerDAO.findByPhone(number);
+        if(obj.isEmpty()) return null;
         return obj.get();
     }
 
