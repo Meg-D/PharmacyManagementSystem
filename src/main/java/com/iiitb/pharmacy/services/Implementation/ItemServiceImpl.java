@@ -44,6 +44,7 @@ public class ItemServiceImpl implements ItemService {
         Double discount = amount * item.getDiscount() * 0.01;
         Sale s = saleDAO.findById(item.getSale_id()).get();
         Item i = new Item(item.getQuantity(),amount,discount,m,s);
+        System.out.println(i);
         return itemDAO.save(i);
     }
 

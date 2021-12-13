@@ -51,14 +51,14 @@ public class RequestServiceImpl implements RequestService {
 
         Optional<Medicine> meds= medicineDAO.findByNameAndCost(r.getMedicine_name(), request.getPrice());
         Medicine m;
-        System.out.println(r.getMedicine_name());
+        //System.out.println(r.getMedicine_name());
         if(meds.isEmpty()){
             m = new Medicine(r.getMedicine_name(), r.getQuantity(), request.getPrice());
             medicineDAO.save(m);
         }
         else{
             m = meds.get();
-            medicineService.updateMedicine(m, request.getQuantity());
+            medicineService.updateMedicineByTransaction(m, r.getQuantity());
         }
         Transaction t = new Transaction(r.getQuantity(),request.getPrice(),formattedDate,m,v,u);
         transactionDAO.save(t);
