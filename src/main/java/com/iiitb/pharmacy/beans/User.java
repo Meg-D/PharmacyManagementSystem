@@ -2,7 +2,6 @@ package com.iiitb.pharmacy.beans;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Entity
@@ -27,9 +26,7 @@ public class User {
     @Column
     private String address;
 
-    public User(){
-
-    }
+    public User(){}
 
     public User(Integer user_id, String username, String password, String phone, String address) {
         this.user_id = user_id;

@@ -1,7 +1,5 @@
 package com.iiitb.pharmacy.controller;
 
-
-import com.fasterxml.jackson.core.io.JsonEOFException;
 import com.iiitb.pharmacy.beans.User;
 import com.iiitb.pharmacy.dto.Password;
 import com.iiitb.pharmacy.dto.Users;
@@ -18,16 +16,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    // update user profile
     @PutMapping("/update")
     public User updateProfile(@RequestBody User user){
         return userService.updateProfile(user);
     }
 
+    // register a new user
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
     }
 
+    // user login
     @GetMapping("/login/{user}")
     public User login(@PathVariable String user){
         JSONObject json = new JSONObject(user);
@@ -37,6 +39,7 @@ public class UserController {
         return userService.login(user1);
     }
 
+    // change user password
     @PostMapping("/updatePassword")
     public String changePassword(@RequestBody Password password){return userService.changePassword(password.getUsername(), password.getOld(), password.getNewp(), password.getNewp2());}
 }

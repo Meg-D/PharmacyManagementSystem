@@ -32,54 +32,62 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private MedicineService medicineService;
 
+    // get list of all the transactions
     @Override
     public List<Transaction> getTransactions() {
         return transactionDAO.findAll();
     }
 
+    // get list of transactions based on user id
     @Override
     public Optional<List<Transaction>> getTransactionsByUserId(int id) {
-        Optional<User> u = userDAO.findById(id);
-        if(u.isEmpty())
-            return null;
-        Optional<List<Transaction>> t = transactionDAO.findByUserId(u.get());
-        if(t.isEmpty())
-            return null;
-        return t;
+        Optional<User> user = userDAO.findById(id);
+        if(user.isEmpty()) return null;
+
+        Optional<List<Transaction>> transactionList = transactionDAO.findByUserId(user.get());
+        if(transactionList.isEmpty()) return null;
+        return transactionList;
     }
 
+    // get list of transactions based on vendor id
     @Override
     public Optional<List<Transaction>> getTransactionsByVendorId(int id) {
-        Optional<Vendor> v = vendorDAO.findById(id);
-        if(v.isEmpty())
-            return null;
-        Optional<List<Transaction>> t = transactionDAO.findByVendorId(v.get());
-        if(t.isEmpty())
-            return null;
-        return t;
+        Optional<Vendor> vendor = vendorDAO.findById(id);
+        if(vendor.isEmpty()) return null;
+
+        Optional<List<Transaction>> transactionList = transactionDAO.findByVendorId(vendor.get());
+        if(transactionList.isEmpty()) return null;
+
+        return transactionList;
     }
 
+
+    // add a transaction
     @Override
     public Transaction addTransaction(Transactions transaction) {
 
-       // transaction.setPrice(transaction.getPrice());
-        //Medicine m = medicineDAO.getById(transaction.getMedicine_id());
-        Medicine med;
-        Optional<Medicine> m = medicineDAO.findByNameAndCost(transaction.getMedicine_name(),transaction.getPrice());
-        if(m.isEmpty()){
+        Medicine medicine;
+        Optional<Medicine> db_medicine = medicineDAO.findByNameAndCost(transaction.getMedicine_name(),transaction.getPrice());
+
+        // medicine doesn't exist : add a new one
+        if(db_medicine.isEmpty()){
             Medicine m1 = new Medicine(transaction.getMedicine_name(),transaction.getQuantity(),transaction.getPrice()*1.2);
-            med = medicineService.addMedicine(m1);
+            medicine = medicineService.addMedicine(m1);
         }
+
+        // it does exist : update existing entry
         else{
-            med = m.get();
-            medicineService.updateMedicineByTransaction(med,transaction.getQuantity());
+            medicine = db_medicine.get();
+            medicineService.updateMedicineByTransaction(medicine,transaction.getQuantity());
         }
-        User u = userDAO.findById(transaction.getUser_id()).get();
+
+        User user = userDAO.findById(transaction.getUser_id()).get();
         Vendor v = vendorDAO.findById(transaction.getVendor_id()).get();
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formattedDate = formatter.format(date);
-        Transaction t = new Transaction(transaction.getQuantity(),transaction.getPrice(),formattedDate,med,v,u);
-        return transactionDAO.save(t);
+
+        Transaction new_transaction = new Transaction(transaction.getQuantity(),transaction.getPrice(),formattedDate,medicine,v,user);
+        return transactionDAO.save(new_transaction);
     }
 }

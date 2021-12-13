@@ -4,8 +4,6 @@ import java.util.*;
 import com.iiitb.pharmacy.beans.Medicine;
 import com.iiitb.pharmacy.services.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,27 +14,25 @@ public class MedicineController {
     @Autowired
     private MedicineService medicineService;
 
-    @GetMapping("/get/{medicineName}")
-    public Medicine getMedicineByName(@PathVariable String medicineName){
-        return medicineService.getMedicineByName(medicineName);
-    }
 
+    // return list of all the medicines
     @GetMapping("/getAll")
     public List<Medicine> getAllMedicines(){
         return medicineService.getAllMedicines();
     }
 
+
+    // form to add a new medicine
+    // add medicine when a request is processed
     @PostMapping(path = "/add",
     produces = {"application/json"},
     consumes = {"application/json"})
-    // a form to add a new medicine
-    // add medicine when a request is processed
     public Medicine addMedicine(@RequestBody Medicine medicine){
         return this.medicineService.addMedicine(medicine);
     }
 
-    // not required here
-    // while adding item, the updateMedicine service will be called directly
+
+    // update an existing medicine : case - expired, etc
     @PutMapping(path = "/update",
     produces = {"application/json"},
     consumes = {"application/json"})
@@ -44,6 +40,7 @@ public class MedicineController {
         return this.medicineService.updateMedicine(medicine, medicine.getQuantity_left());
     }
 
+    // delete medicine entry : set quantity to 0
     @PutMapping(path = "/delete/{id}")
     public void deleteMedicine(@PathVariable String id) {
         this.medicineService.deleteMedicine(Integer.parseInt(id));

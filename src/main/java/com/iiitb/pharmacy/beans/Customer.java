@@ -24,9 +24,9 @@ public class Customer {
     @Column(unique = true)
     private String phone;
 
+    //1-normal 2-hospital
     @Column(nullable = false)
-    private Integer type; //1-normal 2-hospital
-
+    private Integer type;
 
 }
 

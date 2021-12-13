@@ -13,16 +13,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
+    // update user profile
     @Override
     public User updateProfile(User user){
         return userDAO.save(user);
     }
 
+    // add a new user
     @Override
     public User addUser(User user){
         return userDAO.save(user);
     }
 
+    // user login
     @Override
     public User login(Users user){
         String username = user.getUsername();
@@ -30,11 +33,10 @@ public class UserServiceImpl implements UserService {
         return userDAO.findByUsernameEqualsAndPasswordEquals(username,password);
     }
 
+    // change password
     @Override
     public String changePassword(String email,String old, String newp, String newp2) {
         String check = userDAO.getPasswordByEmail(email);
-//        System.out.println(old);
-//        System.out.println(check);
         if(!old.equals(check)) return "Old password does not match";
         if(!newp.equals(newp2)) return "Confirm password does not match";
         userDAO.updatePassword(email,newp);

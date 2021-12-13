@@ -14,18 +14,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernationConfiguration {
 
-    //    @Value("${db.driver}")
-//    private String DRIVER;
-//
-//    @Value("${db.password}")
-//    private String PASSWORD;
-//
-//    @Value("${db.url}")
-//    private String URL;
-//
-//    @Value("${db.username}")
-//    private String USERNAME;
-
     @Value("${hibernate.dialect}")
     private String DIALECT;
 
@@ -39,15 +27,7 @@ public class HibernationConfiguration {
     private String PACKAGES_TO_SCAN;
 
     Source data = new Source();
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(DRIVER);
-//        dataSource.setUrl(URL);
-//        dataSource.setUsername(USERNAME);
-//        dataSource.setPassword(PASSWORD);
-//        return dataSource;
-//    }
+
 
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {

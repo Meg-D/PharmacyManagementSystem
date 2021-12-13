@@ -1,10 +1,8 @@
 package com.iiitb.pharmacy.services.Implementation;
 
-import com.iiitb.pharmacy.beans.Customer;
 import com.iiitb.pharmacy.beans.Item;
 import com.iiitb.pharmacy.beans.Medicine;
 import com.iiitb.pharmacy.beans.Sale;
-import com.iiitb.pharmacy.dao.CustomerDAO;
 import com.iiitb.pharmacy.dao.ItemDAO;
 import com.iiitb.pharmacy.dao.MedicineDAO;
 import com.iiitb.pharmacy.dao.SaleDAO;
@@ -29,21 +27,20 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private MedicineDAO medicineDAO;
 
-    @Autowired
-    private CustomerDAO customerDAO;
+
     @Autowired
     private MedicineService medicineService;
 
+    // add an item
     @Override
     public Item addItem(Items item) {
-        Medicine m = medicineDAO.findById(item.getMed_id()).get();
-        Medicine test = medicineService.updateMedicineBySale(m, item.getQuantity());
+        Medicine medicine = medicineDAO.findById(item.getMed_id()).get();
+        Medicine test = medicineService.updateMedicineBySale(medicine, item.getQuantity());
         if (test==null) return null;
         Double amount = medicineDAO.findById(item.getMed_id()).get().getCost();
-        //Customer c = customerDAO.findById(item.getCust_id()).get();
         Double discount = amount * item.getDiscount() * 0.01;
         Sale s = saleDAO.findById(item.getSale_id()).get();
-        Item i = new Item(item.getQuantity(),amount,discount,m,s);
+        Item i = new Item(item.getQuantity(),amount,discount,medicine,s);
         System.out.println(i);
         return itemDAO.save(i);
     }

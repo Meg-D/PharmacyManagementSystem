@@ -12,7 +12,6 @@ public class Requests {
     public Double getPrice() {
         return price;
     }
-
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -20,7 +19,6 @@ public class Requests {
     public String getMedicine_name() {
         return medicine_name;
     }
-
     public void setMedicine_name(String medicine_name) {
         this.medicine_name = medicine_name;
     }
@@ -28,7 +26,6 @@ public class Requests {
     public Integer getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -36,7 +33,6 @@ public class Requests {
     public Integer getPlaced_by() {
         return placed_by;
     }
-
     public void setPlaced_by(Integer placed_by) {
         this.placed_by = placed_by;
     }
@@ -44,7 +40,6 @@ public class Requests {
     public Integer getAccepted_by() {
         return accepted_by;
     }
-
     public void setAccepted_by(Integer accepted_by) {
         this.accepted_by = accepted_by;
     }
@@ -52,7 +47,6 @@ public class Requests {
     public Integer getVendor_id() {
         return vendor_id;
     }
-
     public void setVendor_id(Integer vendor_id) {
         this.vendor_id = vendor_id;
     }
@@ -60,7 +54,6 @@ public class Requests {
     public Integer getRequest_id() {
         return request_id;
     }
-
     public void setRequest_id(Integer request_id) {
         this.request_id = request_id;
     }
