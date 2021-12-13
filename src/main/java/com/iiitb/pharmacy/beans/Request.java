@@ -48,11 +48,7 @@ public class Request {
         this.quantity=quantity;
         this.status=i;
         this.order_date=formattedDate;
-        this.delivery_date=null;
         this.placed_by=u;
-        this.accepted_by=null;
-        this.vendor_id=null;
-
     }
 }
 

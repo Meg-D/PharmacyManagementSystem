@@ -73,10 +73,10 @@ public class PharmacyApplication {
             Customer customer6 = customerDAO.save(new Customer(6,"Jin","4444444444",1));
             Customer customer7 = customerDAO.save(new Customer(7,"V","3030303030",1));
 
-            requestDAO.save(new Request("Aspirin",25,0,"30/10/2021 19:20:21",user1));
+            //requestDAO.save(new Request("Aspirin",25,0,"30/10/2021 19:20:21",user1));
             requestDAO.save(new Request(2,"Savlon",25,1,"07/11/2021 12:20:13","21/11/2021 19:21:23",user1,user1,vendor1));
-            requestDAO.save(new Request("Bacampicillin",20,0,"08/11/2021 08:45:21",user2));
-            requestDAO.save(new Request("Hydroxycholoquine",75,0,"20/09/2021 02:30:56",user3));
+            //requestDAO.save(new Request("Bacampicillin",20,0,"08/11/2021 08:45:21",user2));
+            //requestDAO.save(new Request("Hydroxycholoquine",75,0,"20/09/2021 02:30:56",user3));
             requestDAO.save(new Request(5,"Limcee",80,1,"18/11/2021 17:34:39","30/11/21 05:45:57",user3,user2,vendor1));
             requestDAO.save(new Request(6,"Paracetamol",45,1,"04/12/2021 20:20:20","06/12/2021 06:16:26",user2,user1,vendor2));
 
