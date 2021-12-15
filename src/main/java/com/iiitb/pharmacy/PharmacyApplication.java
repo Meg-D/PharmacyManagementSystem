@@ -48,11 +48,11 @@ public class PharmacyApplication {
             User user2 = userDAO.save(new User(2,"Ronaldo","juve","7575038731","Rome, Italy"));
             User user3 = userDAO.save(new User(3,"Neymar","psg","7002673946","Paris, France"));
 
-            Vendor vendor1 = vendorDAO.save(new Vendor(1,"Light Yagami","Yokohama","28/02/1986 10:31:25","lightyagami@deathnote.com","098"));
-            Vendor vendor2 = vendorDAO.save(new Vendor(2,"Okabe Rintaru","Kyoto","07/10/2001 21:40:08","okaberintaru@steinsgate.com","098"));
-            Vendor vendor3 = vendorDAO.save(new Vendor(3,"Itachi Uchiha","Osaka","09/06/1998 12:06:23","itachiuchiha@akatsuki.com","098"));
-            Vendor vendor4 = vendorDAO.save(new Vendor(4,"Itadori Yuuji","Nagoya","20/03/2006 15:40:20","itadoriyuuji@jjk.com","098"));
-            Vendor vendor5 = vendorDAO.save(new Vendor(5,"Kaneki Ken","Tokyo","20/10/1994 04:10:55","kanekiken@tokyoghoul.com","098"));
+            Vendor vendor1 = vendorDAO.save(new Vendor(1,"Light Yagami","Yokohama","28/02/1986 10:31:25","lightyagami@deathnote.com","2828282828"));
+            Vendor vendor2 = vendorDAO.save(new Vendor(2,"Okabe Rintaru","Kyoto","07/10/2001 21:40:08","okaberintaru@steinsgate.com","0707070707"));
+            Vendor vendor3 = vendorDAO.save(new Vendor(3,"Itachi Uchiha","Osaka","09/06/1998 12:06:23","itachiuchiha@akatsuki.com","0909090909"));
+            Vendor vendor4 = vendorDAO.save(new Vendor(4,"Itadori Yuuji","Nagoya","20/03/2006 15:40:20","itadoriyuuji@jjk.com","2020202020"));
+            Vendor vendor5 = vendorDAO.save(new Vendor(5,"Kaneki Ken","Tokyo","20/10/1994 04:10:55","kanekiken@tokyoghoul.com","1010101010"));
 
             Medicine medicine1 = medicineDAO.save(new Medicine(1,"Paracetamol",35,12.0));
             Medicine medicine2 = medicineDAO.save(new Medicine(2,"Ibuprofen",5,30.0));
